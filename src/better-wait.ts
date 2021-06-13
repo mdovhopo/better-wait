@@ -28,7 +28,7 @@ export async function wait<T = number>(
         return done(options.returnValue);
       }
       // @ts-expect-error if no returnValue is provided, T will default to number,
-      // and functions will return number, ts does not like my idea though...
+      // and function will return number, ts does not like my idea though...
       return done(delay);
     }, delay as number);
   });
