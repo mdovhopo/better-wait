@@ -22,7 +22,7 @@ export async function wait<T = number>(
     throw new TypeError(`duration must be in a range [0-2147483647].`);
   }
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
+    const run = () => {
       const done = options.reject ? reject : resolve;
       if (options.returnValue) {
         return done(options.returnValue);
@@ -30,6 +30,11 @@ export async function wait<T = number>(
       // @ts-expect-error if no returnValue is provided, T will default to number,
       // and function will return number, ts does not like my idea though...
       return done(delay);
-    }, delay as number);
+    };
+    // return on net tick instead of waiting for timers to complete
+    if (delay === 0) {
+      return run();
+    }
+    setTimeout(() => run(), delay as number);
   });
 }
