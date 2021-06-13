@@ -18,9 +18,9 @@ yarn add better-wait
 import { wait } from 'better-wait';
 
 await wait('3s'); // use human readable values for delay
-await wait(1000); // use milliseconds if you feel more like machine
+await wait(1000); // use milliseconds if you feel more like a machine
 await wait('1 hour', { reject: true }); // promise will reject
-await wait('1 year', { returnValue: 'your custom return value' }); // you caan also return anything you want
+await wait('1 year', { returnValue: 'your custom return value' }); // you can also return anything you want
 ```
 
 Bootstrapped with: [create-ts-lib-gh](https://github.com/glebbash/create-ts-lib-gh)
