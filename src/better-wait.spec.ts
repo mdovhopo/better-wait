@@ -27,7 +27,7 @@ describe('wait', () => {
     const start = performance.now();
     await expect(wait('3s')).resolves.toEqual(3000);
     const end = performance.now();
-    const diff = start - end;
+    const diff = end - start;
     expect(diff - 3000).toBeLessThan(10);
   });
 
@@ -35,7 +35,7 @@ describe('wait', () => {
     const start = performance.now();
     await expect(wait('3s', { reject: true })).rejects.toEqual(3000);
     const end = performance.now();
-    const diff = start - end;
+    const diff = end - start;
     expect(diff - 3000).toBeLessThan(10);
   });
 
@@ -54,5 +54,13 @@ describe('wait', () => {
         returnValue: error,
       })
     ).rejects.toEqual(error);
+  });
+
+  it('resolves immediately if delay is 0', async () => {
+    const start = performance.now();
+    await expect(wait(0)).resolves.toEqual(0);
+    const end = performance.now();
+    const diff = end - start;
+    expect(diff).toBeLessThan(1.5);
   });
 });
