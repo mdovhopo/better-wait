@@ -31,6 +31,8 @@ describe('wait', () => {
     expect(diff - 3000).toBeLessThan(10);
   });
 
+  wait<number>(0);
+
   it('rejects after delay', async () => {
     const start = performance.now();
     await expect(wait('3s', { reject: true })).rejects.toEqual(3000);
