@@ -21,7 +21,7 @@ export const wait: WaitFunction = async (duration, options = {}) => {
   return new Promise((resolve, reject) => {
     const run = () => {
       const done = options.reject ? reject : resolve;
-      return done((options.returnValue ?? delay) as never);
+      return done(('returnValue' in options ? options.returnValue : delay) as never);
     };
 
     // if delay is 0 return on next tick
