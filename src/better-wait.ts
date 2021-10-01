@@ -35,7 +35,7 @@ function getDelayInMillis(duration: string | number): number {
   }
 
   const delay = ms(duration);
-  if (delay !== undefined) {
+  if (delay === undefined) {
     throw new TypeError(
       `[${duration}] is not a valid time format, navigate docs for format help - https://www.npmjs.com/package/ms.`
     );
