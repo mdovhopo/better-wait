@@ -5,11 +5,17 @@ interface WaitFunction {
   <T>(duration: string | number, options?: { reject?: boolean; returnValue?: T }): Promise<number>;
 }
 
+/**
+ * Waits for specified `duration` resolving or rejecting based on options
+ * @param duration number of milliseconds or a string in `ms` format
+ * @param options promise resolution options
+ * @returns specified returnValue or wait delay in milliseconds
+ */
 export const wait: WaitFunction = async (duration, options = {}) => {
   const delay = getDelayInMillis(duration);
 
   if (delay < 0 || delay > 2147483647) {
-    throw new TypeError(`duration must be in a range [0-2147483647].`);
+    throw new RangeError(`duration must be in a range [0-2147483647].`);
   }
 
   return new Promise((resolve, reject) => {
